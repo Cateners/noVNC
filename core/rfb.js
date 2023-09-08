@@ -423,7 +423,7 @@ export default class RFB extends EventTargetMixin {
 
         this._scaleFactor = scaleFactor;
 
-        this._requestRemoteResize();
+        this._handleResize();
 
         /*if (this._rfbConnectionState === 'connected') {
             this._sendEncodings();
