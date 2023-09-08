@@ -863,6 +863,7 @@ const UI = {
         UI.updateSetting('resize');
         UI.updateSetting('quality');
         UI.updateSetting('compression');
+        UI.updateSetting('scale_factor');
         UI.updateSetting('shared');
         UI.updateSetting('view_only');
         UI.updateSetting('path');
@@ -1062,6 +1063,7 @@ const UI = {
         UI.rfb.resizeSession = UI.getSetting('resize') === 'remote';
         UI.rfb.qualityLevel = parseInt(UI.getSetting('quality'));
         UI.rfb.compressionLevel = parseInt(UI.getSetting('compression'));
+        UI.rfb.scaleFactor = parseInt(UI.getSetting('scale_factor'));
         UI.rfb.showDotCursor = UI.getSetting('show_dot');
 
         UI.updateViewOnly(); // requires UI.rfb
