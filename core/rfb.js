@@ -297,6 +297,7 @@ export default class RFB extends EventTargetMixin {
 
         this._qualityLevel = 6;
         this._compressionLevel = 2;
+        this._scaleFactor = 1;
     }
 
     // ===== PROPERTIES =====
@@ -401,6 +402,26 @@ export default class RFB extends EventTargetMixin {
         }
 
         this._compressionLevel = compressionLevel;
+
+        if (this._rfbConnectionState === 'connected') {
+            this._sendEncodings();
+        }
+    }
+
+    get scaleFactor() {
+        return this._scaleFactor;
+    }
+    set scaleFactor(scaleFactor) {
+        if (scaleFactor < 0.2 || scaleFactor > 5) {
+            Log.Error("compressionLevel must be between 0 and 9");
+            return;
+        }
+
+        if (this._scaleFactor === scaleFactor) {
+            return;
+        }
+
+        this._scaleFactor = scaleFactor;
 
         if (this._rfbConnectionState === 'connected') {
             this._sendEncodings();

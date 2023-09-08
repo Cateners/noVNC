@@ -361,6 +361,8 @@ const UI = {
         UI.addSettingChangeHandler('quality', UI.updateQuality);
         UI.addSettingChangeHandler('compression');
         UI.addSettingChangeHandler('compression', UI.updateCompression);
+        UI.addSettingChangeHandler('scale_factor');
+        UI.addSettingChangeHandler('scale_factor', UI.updateScaleFactor);
         UI.addSettingChangeHandler('view_clip');
         UI.addSettingChangeHandler('view_clip', UI.updateViewClip);
         UI.addSettingChangeHandler('shared');
@@ -1423,7 +1425,19 @@ const UI = {
     },
 
 /* ------^-------
- *  /COMPRESSION
+ *   /COMPRESSION
+ * ==============
+ *  SCALE_FACTOR
+ * ------v------*/
+
+    updateScaleFactor() {
+        if (!UI.rfb) return;
+
+        UI.rfb.scaleFactor = parseInt(UI.getSetting('scaleFactor'));
+    },
+
+/* ------^-------
+ *  /SCALE_FACTOR
  * ==============
  *    KEYBOARD
  * ------v------*/
