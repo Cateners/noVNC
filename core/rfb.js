@@ -797,7 +797,7 @@ export default class RFB extends EventTargetMixin {
             this._display.scale = 1.0;
         } else {
             const size = this._screenSize();
-            this._display.autoscale(size.w, size.h);
+            this._display.autoscale(size.w * this.scaleFactor, size.h * this.scaleFactor);
         }
         this._fixScrollbars();
     }
@@ -826,7 +826,7 @@ export default class RFB extends EventTargetMixin {
     // Gets the the size of the available screen
     _screenSize() {
         let r = this._screen.getBoundingClientRect();
-        return { w: r.width, h: r.height };
+        return { w: r.width / this.scaleFactor, h: r.height / this.scaleFactor };
     }
 
     _fixScrollbars() {
