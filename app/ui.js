@@ -1433,7 +1433,7 @@ const UI = {
     updateScaleFactor() {
         if (!UI.rfb) return;
 
-        UI.rfb.scaleFactor = parseInt(UI.getSetting('scaleFactor'));
+        UI.rfb.scaleFactor = parseFloat(UI.getSetting('scale_factor'));
     },
 
 /* ------^-------

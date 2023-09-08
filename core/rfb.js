@@ -413,8 +413,6 @@ export default class RFB extends EventTargetMixin {
     }
     set scaleFactor(scaleFactor) {
 
-        alert(scaleFactor,",",this._scaleFactor);
-
         if (scaleFactor < 0.2 || scaleFactor > 5) {
             Log.Error("compressionLevel must be between 0 and 9");
             return;
