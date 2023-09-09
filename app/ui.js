@@ -177,7 +177,7 @@ const UI = {
         UI.initSetting('resize', 'off');
         UI.initSetting('quality', 6);
         UI.initSetting('compression', 2);
-        UI.initSetting('scale_factor', (/Android/i.test(navigator.userAgent)) ? 1.5 : 1);
+        UI.initSetting('scale_factor', 1.5);
         UI.initSetting('shared', true);
         UI.initSetting('view_only', false);
         UI.initSetting('show_dot', false);
@@ -1064,7 +1064,7 @@ const UI = {
         UI.rfb.resizeSession = UI.getSetting('resize') === 'remote';
         UI.rfb.qualityLevel = parseInt(UI.getSetting('quality'));
         UI.rfb.compressionLevel = parseInt(UI.getSetting('compression'));
-        UI.rfb.scaleFactor = parseInt(UI.getSetting('scale_factor'));
+        UI.rfb.scaleFactor = parseFloat(UI.getSetting('scale_factor'));
         UI.rfb.showDotCursor = UI.getSetting('show_dot');
 
         UI.updateViewOnly(); // requires UI.rfb

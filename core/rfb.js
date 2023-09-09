@@ -297,7 +297,7 @@ export default class RFB extends EventTargetMixin {
 
         this._qualityLevel = 6;
         this._compressionLevel = 2;
-        this._scaleFactor = (/Android/i.test(navigator.userAgent)) ? 1.5 : 1;
+        this._scaleFactor = 1.5;
     }
 
     // ===== PROPERTIES =====
