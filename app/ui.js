@@ -1698,7 +1698,7 @@ const UI = {
         }
     },
 
-    toggleAlt() {
+    toggleShift() {
         const btn = document.getElementById('noVNC_toggle_shift_button');
         if (btn.classList.contains("noVNC_selected")) {
             UI.sendKey(KeyTable.XK_Shift_L, "ShiftLeft", false);
