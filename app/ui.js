@@ -293,10 +293,28 @@ const UI = {
             .addEventListener('click', UI.toggleExtraKeys);
         document.getElementById("noVNC_toggle_ctrl_button")
             .addEventListener('click', UI.toggleCtrl);
-        document.getElementById("noVNC_toggle_windows_button")
-            .addEventListener('click', UI.toggleWindows);
         document.getElementById("noVNC_toggle_alt_button")
             .addEventListener('click', UI.toggleAlt);
+        document.getElementById("noVNC_toggle_shift_button")
+            .addEventListener('click', UI.toggleShift);
+        document.getElementById("noVNC_send_up_button")
+            .addEventListener('click', UI.sendUp);
+        document.getElementById("noVNC_send_down_button")
+            .addEventListener('click', UI.sendDown);
+        document.getElementById("noVNC_send_left_button")
+            .addEventListener('click', UI.sendLeft);
+        document.getElementById("noVNC_send_right_button")
+            .addEventListener('click', UI.sendRight);
+        document.getElementById("noVNC_send_pgup_button")
+            .addEventListener('click', UI.sendPgUp);
+        document.getElementById("noVNC_send_pgdn_button")
+            .addEventListener('click', UI.sendPgDn);
+        document.getElementById("noVNC_send_home_button")
+            .addEventListener('click', UI.sendHome);
+        document.getElementById("noVNC_send_end_button")
+            .addEventListener('click', UI.sendEnd);
+        document.getElementById("noVNC_toggle_windows_button")
+            .addEventListener('click', UI.toggleWindows);
         document.getElementById("noVNC_send_tab_button")
             .addEventListener('click', UI.sendTab);
         document.getElementById("noVNC_send_esc_button")
@@ -1626,6 +1644,38 @@ const UI = {
         UI.sendKey(KeyTable.XK_Tab, "Tab");
     },
 
+    sendUp() {
+        UI.sendKey(KeyTable.XK_Up, "Up");
+    },
+
+    sendDown() {
+        UI.sendKey(KeyTable.XK_Down, "Down");
+    },
+
+    sendLeft() {
+        UI.sendKey(KeyTable.XK_Left, "Left");
+    },
+
+    sendRight() {
+        UI.sendKey(KeyTable.XK_Right, "Right");
+    },
+
+    sendPgUp() {
+        UI.sendKey(KeyTable.XK_Page_Up, "PgUp");
+    },
+
+    sendPgDn() {
+        UI.sendKey(KeyTable.XK_Page_Down, "PgDn");
+    },
+
+    sendHome() {
+        UI.sendKey(KeyTable.XK_Home, "Home");
+    },
+
+    sendEnd() {
+        UI.sendKey(KeyTable.XK_End, "End");
+    },
+
     toggleCtrl() {
         const btn = document.getElementById('noVNC_toggle_ctrl_button');
         if (btn.classList.contains("noVNC_selected")) {
@@ -1637,17 +1687,6 @@ const UI = {
         }
     },
 
-    toggleWindows() {
-        const btn = document.getElementById('noVNC_toggle_windows_button');
-        if (btn.classList.contains("noVNC_selected")) {
-            UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", false);
-            btn.classList.remove("noVNC_selected");
-        } else {
-            UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", true);
-            btn.classList.add("noVNC_selected");
-        }
-    },
-
     toggleAlt() {
         const btn = document.getElementById('noVNC_toggle_alt_button');
         if (btn.classList.contains("noVNC_selected")) {
@@ -1655,6 +1694,28 @@ const UI = {
             btn.classList.remove("noVNC_selected");
         } else {
             UI.sendKey(KeyTable.XK_Alt_L, "AltLeft", true);
+            btn.classList.add("noVNC_selected");
+        }
+    },
+
+    toggleAlt() {
+        const btn = document.getElementById('noVNC_toggle_shift_button');
+        if (btn.classList.contains("noVNC_selected")) {
+            UI.sendKey(KeyTable.XK_Shift_L, "ShiftLeft", false);
+            btn.classList.remove("noVNC_selected");
+        } else {
+            UI.sendKey(KeyTable.XK_Shift_L, "ShiftLeft", true);
+            btn.classList.add("noVNC_selected");
+        }
+    },
+
+    toggleWindows() {
+        const btn = document.getElementById('noVNC_toggle_windows_button');
+        if (btn.classList.contains("noVNC_selected")) {
+            UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", false);
+            btn.classList.remove("noVNC_selected");
+        } else {
+            UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", true);
             btn.classList.add("noVNC_selected");
         }
     },
