@@ -393,6 +393,7 @@ html {
   border-radius: 6px;
   background-color: transparent;
   background-image: unset; /* we don't want the gradiant from input.css */
+  color: white;
 }
 #noVNC_control_bar .noVNC_button.noVNC_selected {
   border-color: rgba(0, 0, 0, 0.8);
