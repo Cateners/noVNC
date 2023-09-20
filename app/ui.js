@@ -305,6 +305,8 @@ const UI = {
             .addEventListener('click', UI.sendLeft);
         document.getElementById("noVNC_send_right_button")
             .addEventListener('click', UI.sendRight);
+        document.getElementById("noVNC_send_enter_button")
+            .addEventListener('click', UI.sendEnter);
         document.getElementById("noVNC_send_pgup_button")
             .addEventListener('click', UI.sendPgUp);
         document.getElementById("noVNC_send_pgdn_button")
@@ -1658,6 +1660,10 @@ const UI = {
 
     sendRight() {
         UI.sendKey(KeyTable.XK_Right, "Right");
+    },
+
+    sendEnter() {
+        UI.sendKey(KeyTable.XK_Return, "Enter");
     },
 
     sendPgUp() {
