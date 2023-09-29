@@ -181,6 +181,7 @@ const UI = {
         UI.initSetting('shared', true);
         UI.initSetting('view_only', false);
         UI.initSetting('show_dot', false);
+        UI.initSetting('force_cursor', false);
         UI.initSetting('path', 'websockify');
         UI.initSetting('repeaterID', '');
         UI.initSetting('reconnect', false);
@@ -391,6 +392,8 @@ const UI = {
         UI.addSettingChangeHandler('view_only', UI.updateViewOnly);
         UI.addSettingChangeHandler('show_dot');
         UI.addSettingChangeHandler('show_dot', UI.updateShowDotCursor);
+        UI.addSettingChangeHandler('force_cursor');
+        UI.addSettingChangeHandler('force_cursor', UI.updateForceCursor);
         UI.addSettingChangeHandler('host');
         UI.addSettingChangeHandler('port');
         UI.addSettingChangeHandler('path');
@@ -1086,6 +1089,7 @@ const UI = {
         UI.rfb.compressionLevel = parseInt(UI.getSetting('compression'));
         UI.rfb.scaleFactor = parseFloat(UI.getSetting('scale_factor'));
         UI.rfb.showDotCursor = UI.getSetting('show_dot');
+        UI.rfb.forceCursor = UI.getSetting('force_cursor');
 
         UI.updateViewOnly(); // requires UI.rfb
     },
@@ -1801,6 +1805,11 @@ const UI = {
     updateShowDotCursor() {
         if (!UI.rfb) return;
         UI.rfb.showDotCursor = UI.getSetting('show_dot');
+    },
+
+    updateForceCursor() {
+        if (!UI.rfb) return;
+        UI.rfb.forceCursor = UI.getSetting('force_cursor');
     },
 
     updateLogging() {
