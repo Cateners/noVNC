@@ -369,7 +369,8 @@ export default class RFB extends EventTargetMixin {
     get forceCursor() { return this._forceCursor; }
     set forceCursor(show) {
         this._forceCursor = show;
-        this._canvas.style.cursor = show ? 'pointer' : 'none';
+        //Don't know why but it won't work unless I set a timeout
+        setTimeout(() => this._canvas.style.cursor = show ? 'pointer' : 'none', 1000);
     }
 
     get background() { return this._screen.style.background; }
