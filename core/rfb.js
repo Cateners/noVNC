@@ -297,6 +297,7 @@ export default class RFB extends EventTargetMixin {
 
         this._qualityLevel = 6;
         this._compressionLevel = 2;
+        this._scaleFactor = 1.5;
     }
 
     // ===== PROPERTIES =====
@@ -405,6 +406,29 @@ export default class RFB extends EventTargetMixin {
         if (this._rfbConnectionState === 'connected') {
             this._sendEncodings();
         }
+    }
+
+    get scaleFactor() {
+        return this._scaleFactor;
+    }
+    set scaleFactor(scaleFactor) {
+
+        if (scaleFactor < 0.2 || scaleFactor > 5) {
+            Log.Error("scaleFactor must be between 0.2 and 5");
+            return;
+        }
+
+        if (this._scaleFactor === scaleFactor) {
+            return;
+        }
+
+        this._scaleFactor = scaleFactor;
+
+        this._forceHandleResize();
+
+        /*if (this._rfbConnectionState === 'connected') {
+            this._sendEncodings();
+        }*/
     }
 
     // ===== PUBLIC METHODS =====
@@ -737,6 +761,25 @@ export default class RFB extends EventTargetMixin {
         }
     }
 
+    _forceHandleResize() {
+        // If the window resized then our screen element might have
+        // as well. Update the viewport dimensions.
+        window.requestAnimationFrame(() => {
+            this._updateClip();
+            this._updateScale();
+        });
+
+        if (this._resizeSession) {
+            // Request changing the resolution of the remote display to
+            // the size of the local browser viewport.
+
+            // In order to not send multiple requests before the browser-resize
+            // is finished we wait 0.5 seconds before sending the request.
+            clearTimeout(this._resizeTimeout);
+            this._resizeTimeout = setTimeout(this._requestRemoteResize.bind(this), 500);
+        }
+    }
+
     // Update state of clipping in Display object, and make sure the
     // configured viewport matches the current screen size
     _updateClip() {
@@ -773,10 +816,10 @@ export default class RFB extends EventTargetMixin {
 
     _updateScale() {
         if (!this._scaleViewport) {
-            this._display.scale = 1.0;
+            this._display.scale = 1.0 / this.scaleFactor;
         } else {
             const size = this._screenSize();
-            this._display.autoscale(size.w, size.h);
+            this._display.autoscale(size.w / this.scaleFactor, size.h / this.scaleFactor);
         }
         this._fixScrollbars();
     }
@@ -805,7 +848,7 @@ export default class RFB extends EventTargetMixin {
     // Gets the the size of the available screen
     _screenSize() {
         let r = this._screen.getBoundingClientRect();
-        return { w: r.width, h: r.height };
+        return { w: r.width * this.scaleFactor, h: r.height * this.scaleFactor };
     }
 
     _fixScrollbars() {
