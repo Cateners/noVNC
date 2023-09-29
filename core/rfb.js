@@ -294,6 +294,8 @@ export default class RFB extends EventTargetMixin {
             Log.Warn("Specifying showDotCursor as a RFB constructor argument is deprecated");
             this._showDotCursor = options.showDotCursor;
         }
+        
+        this._forceCursor = false;
 
         this._qualityLevel = 6;
         this._compressionLevel = 2;
@@ -362,6 +364,12 @@ export default class RFB extends EventTargetMixin {
     set showDotCursor(show) {
         this._showDotCursor = show;
         this._refreshCursor();
+    }
+
+    get forceCursor() { return this._forceCursor; }
+    set forceCursor(show) {
+        this._forceCursor = show;
+        this._canvas.style.cursor = show ? 'pointer' : 'none';
     }
 
     get background() { return this._screen.style.background; }
