@@ -374,6 +374,13 @@ const UI = {
     addSettingsHandlers() {
         document.getElementById("noVNC_settings_button")
             .addEventListener('click', UI.toggleSettingsPanel);
+        for (let i of document.getElementById("noVNC_setting_scale_factor_buttons").getElementsByTagName("button")) {
+            i.addEventListener("click", (e) => {
+                document.getElementById('noVNC_setting_scale_factor').value = i.value;
+                UI.saveSetting("scale_factor");
+                UI.updateScaleFactor();
+            });
+        }
 
         UI.addSettingChangeHandler('encrypt');
         UI.addSettingChangeHandler('resize');
